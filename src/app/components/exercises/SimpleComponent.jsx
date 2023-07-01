@@ -5,10 +5,10 @@ const SimpleComponent = ({ onLogin, onLogOut, isAuth }) => {
     return (
         <>
             { isAuth
-                ? <button onClick={onLogOut}>
+                ? <button className='btn btn-secondary' onClick={onLogOut}>
                     Выйти из системы
                 </button>
-                : <button onClick={onLogin}>
+                : <button className='btn btn-primary' onClick={onLogin}>
                     Войти
                 </button>
             }

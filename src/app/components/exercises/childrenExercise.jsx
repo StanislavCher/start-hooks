@@ -1,31 +1,34 @@
 import React from 'react'
 import CollapseWrapper from '../common/collapse'
-import PropTypes from 'prop-types'
+import PropTypes, { oneOfType } from 'prop-types'
 
 const ListComponent = ({ children }) => {
-    console.log(children)
+    // console.log('ch', children)
+    const arrayOfChildren = React.Children.toArray(children)
+    // console.log('arrCh', arrayOfChildren)
     return (
-        <>
-            <ol>
-                { React.Children.map(children, (child, index) => {
-                // return (<div>
-                //     { index + 1 }
-                //     { child.innerText }
-                // </div>)
-                // return null
-                    const config = {
-                        ...child.props,
-                        name: 'name' + index++
-                    }
-                    return React.cloneElement(
-                        <li>
-                            { child }
-                        </li>,
-                        config)
-                })
-                }
-            </ol>
-        </>
+        // <>
+        //     <ol>
+        React.Children.map(arrayOfChildren, (child, index) => {
+        // return (<div>
+        //     { index + 1 }
+        //     { child.innerText }
+        // </div>)
+        // return null
+            const config = {
+                ...child.props,
+                // name: ++index,
+                name: +child.key.replace('.', '') + 1
+            }
+            return React.cloneElement(
+                // <li>
+                // { child }
+                // </li>
+                child,
+                config)
+        })
+        //     </ol>
+        // </>
     )
 }
 
@@ -58,8 +61,12 @@ const ChildrenExercise = () => {
     )
 }
 
-const Component = () => {
-    return <div>Компонент списка</div>
+const Component = ({ name }) => {
+    return <div>{name}. Компонент списка</div>
+}
+
+Component.propTypes = {
+    name: oneOfType([PropTypes.number, PropTypes.string])
 }
 
 export default ChildrenExercise

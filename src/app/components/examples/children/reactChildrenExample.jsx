@@ -14,7 +14,7 @@ const FormComponent = ({ children }) => {
     const handleChange = (target) => {
         setData(prevState => ({ ...prevState, [target.name]: target.value }))
     }
-    console.log('1 ', children)
+    // console.log('1 ', children)
     // return children
     // return React.Children.map(children, (child) => {
     //     console.log(child)
